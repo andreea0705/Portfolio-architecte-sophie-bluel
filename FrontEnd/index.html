@@ -15,9 +15,9 @@
 	<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 	<nav>
 		<ul>
-			<li>projets</li>
-			<li>contact</li>
-			<li>login</li>
+			<li><a class="no-underline" href="#portfolio"> projets</a></li>
+			<li><a class="no-underline" href="#contact"> contact</a></li>
+			<li><a class="no-underline" id="log" href="./login.html">login</a> </li>
 			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 		</ul>
 	</nav>
@@ -35,7 +35,16 @@
 		</article>
 	</section>
 	<section id="portfolio">
-		<h2>Mes Projets</h2>
+		<div class="projets-container">
+			<h2>Mes Projets</h2>
+			<div class="modifier-projets-container">
+				<img class="logo-black modal-open" src="./assets/icons/edition-black.svg" alt="edition">
+				<div class="modifier  modal-open">modifier</div>
+			</div>
+		</div>
+		<div class="allBtn">
+			<button class="btn active"> Tous </button>
+		</div>
 		<div class="gallery">
 			<figure>
 				<img src="assets/images/abajour-tahina.png" alt="Abajour Tahina">
@@ -105,5 +114,6 @@
 		</ul>
 	</nav>
 </footer>
+<script src="script.js"></script>
 </body>
 </html>
