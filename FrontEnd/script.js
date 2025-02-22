@@ -5,10 +5,27 @@
 
 /** -- Début Code exécuté au chargement du site -- **/
   fetchCategoriesWorks();
+  fetchDataWorks();
 /** -- Fin Code exécuté au chargement du site -- **/
 
 /** -- Début déclaration des fonctions -- */
-  function fetchCategoriesWorks() {
+async function fetchDataWorks() {
+  try {
+      fetch("http://" + window.location.hostname + ":5678/api/works")
+      .then(response => {
+          return response.json(); // Convertit la réponse en format JSON
+      })
+      .then(dataCategories => {
+          AddGalleryModale(dataCategories); // Appelle une fonction pour ajouter la galerie modale
+      });
+      // Assurez-vous que elementArray est défini quelque part dans votre code
+      elementArray = dataCategories;
+  } catch (error) {
+      console.log(error);
+  }
+}
+
+  function fetchCategoriesWorks() { 
       try {
         //Envoie une requête à l'API pour obtenir les catégories
         fetch("http://" + window.location.hostname + ":5678/api/categories")
