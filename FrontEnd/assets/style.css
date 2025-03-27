@@ -164,7 +164,7 @@ main {
 #contact {
 	width: 50%;
     margin: auto;
-	display: flex;
+	
 	align-items: start;
 	flex-direction: column;
 	text-align: center;
@@ -239,6 +239,7 @@ footer nav ul {
 	margin: 51px 10px 0 10px;
 	padding: 9px 11px;
 	background-color: white;
+	cursor: pointer;
 }
 
 
@@ -310,7 +311,7 @@ a {
 }
 /* Modifier */
 .modifier-container {
-	display: none;
+	display: flex;
 	justify-content: center;
 	align-items: center;
 	width: 28%;

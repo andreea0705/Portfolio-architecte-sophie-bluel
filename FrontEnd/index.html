@@ -11,82 +11,26 @@
 	<link rel="stylesheet" href="./assets/style.css">
 </head>
 <body>
-	<div class="modal-container">
-		<div class="modal">
-			<button class="modal-close"> <img class="cross" src="./assets/icons/cross.svg" alt="cross">
-			</button>
-			<div class="modalTitle">Galerie photo</div>
-			<div class="img-container"></div>
-			<div class="trait-container">
-				<div class="trait"></div>
-			</div>
-			<button class="addpicture">Ajouter une photo</button>
-			<p class="delete-gallery">Supprimer la galerie</p>
-		</div>
-	</div>
-
-	<div class="modal-container2">
-		<div class="modal2">
-			<button class="arrowback"> <img class="arrowback" src="./assets/icons/Arrow_Back.svg" alt="cross">
-			</button>
-			<button class="modal-close"> <img class="cross" src="./assets/icons/cross.svg" alt="cross">
-			</button>
-			<div class="modalTitle">Ajout photo</div>
-			<div class="ajout-picture ">
-				<div class="preview-image"><img alt="imguser" src="‎" class="import-pictures"></div>
-				<img class="icon-picture" src="./assets/icons/picture.svg" alt="picture">
-				<label class="label-addpic" for="addPic">+ Ajouter photo</label>
-				<input type="file" class="input-addpic" id="addPic" name="addPic" accept="jpg/png">
-				<p>jpg, png : 4mo max</p>
-			</div>
-			<div class="form-container">
-				<form class="formmodal2" method="post">
-					<label for="title">Titre</label>
-					<input class="title" id="title" type="text" >
-					<label for="category">Catégorie</label>
-					<select class="category" id="category" name="category">
-						<option value="">‎ </option>
-						<option id="1" class="selectcategory">Objets</option>
-						<option id="2" class="selectcategory">Appartements</option>
-						<option id="3" class="selectcategory">Hotels & Restaurants</option>
-					</select>
-					<div class="trait-container">
-						<div class="trait"></div>
-					</div>
-					<button type="submit" class="valider">Valider</button>
-				</form>
-			</div>
-			<p class="msg-error"></p>
-		</div>
-	</div>
-
-	<div class="banner">
-		<div class="mode-edition-top">
-			<img class="logo-top" src="./assets/icons/edition-white.svg" alt="edition">
-			<div class="text-top">Mode édition</div>
-			<button type="submit" class="publish"> publiez les changements </button>
-		</div>
-	</div>
 <header>
 	<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 	<nav>
 		<ul>
 			<li><a class="no-underline" href="#portfolio"> projets</a></li>
 			<li><a class="no-underline" href="#contact"> contact</a></li>
-			<li><a class="no-underline" id="log" href="./login.html">login</a> </li>
+			<li><a class="no-underline" id="loginLink" href="./login.html">login</a> </li>
 			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 		</ul>
 	</nav>
 </header>
 <main>
 	<section id="introduction">
-		<figure>
-			<img class="girl-picture" src="./assets/images/sophie-bluel.png" alt="">
-			<div class="modifier-container">
-				<img class="logo-black" src="./assets/icons/edition-black.svg" alt="edition">
-				<div class="modifier">modifier</div>
-			</div>
-		</figure>
+			<figure>
+				<img class="girl-picture" src="./assets/images/sophie-bluel.png" alt="">
+				<div class="modifier-container">
+					<img class="logo-black" src="./assets/icons/edition-black.svg" alt="edition">
+					<div class="modifier">modifier</div>
+				</div>
+			</figure>
 		<article>
 			<h2>Designer d'espace</h2>
 			<p>Je raconte votre histoire, je valorise vos idées. Je vous accompagne de la conception à la livraison finale du chantier.</p>
@@ -106,47 +50,47 @@
 			<button class="btn active"> Tous </button>
 		</div>
 		<div class="gallery">
-			<figure>
+			<figure  data-category="category1">
 				<img src="assets/images/abajour-tahina.png" alt="Abajour Tahina">
 				<figcaption>Abajour Tahina</figcaption>
 			</figure>
-			<figure>
+			<figure  data-category="category2">
 				<img src="assets/images/appartement-paris-v.png" alt="Appartement Paris V">
 				<figcaption>Appartement Paris V</figcaption>
 			</figure>
-			<figure>
+			<figure data-category="category3" >
 				<img src="assets/images/restaurant-sushisen-londres.png" alt="Restaurant Sushisen - Londres">
 				<figcaption>Restaurant Sushisen - Londres</figcaption>
 			</figure>
-			<figure>
+			<figure data-category="category4" >
 				<img src="assets/images/la-balisiere.png" alt="Villa “La Balisiere” - Port Louis">
 				<figcaption>Villa “La Balisiere” - Port Louis</figcaption>
 			</figure>
-			<figure>
+			<figure data-category="category5" >
 				<img src="assets/images/structures-thermopolis.png" alt="Structures Thermopolis">
 				<figcaption>Structures Thermopolis</figcaption>
 			</figure>
-			<figure>
+			<figure data-category="category6" >
 				<img src="assets/images/appartement-paris-x.png" alt="Appartement Paris X">
 				<figcaption>Appartement Paris X</figcaption>
 			</figure>
-			<figure>
+			<figure data-category="category7" >
 				<img src="assets/images/le-coteau-cassis.png" alt="Pavillon “Le coteau” - Cassis">
 				<figcaption>Pavillon “Le coteau” - Cassis</figcaption>
 			</figure>
-			<figure>
+			<figure data-category="category8" >
 				<img src="assets/images/villa-ferneze.png" alt="Villa Ferneze - Isola d’Elba">
 				<figcaption>Villa Ferneze - Isola d’Elba</figcaption>
 			</figure>
-			<figure>
+			<figure data-category="category9" >
 				<img src="assets/images/appartement-paris-xviii.png" alt="Appartement Paris XVIII">
 				<figcaption>Appartement Paris XVIII</figcaption>
 			</figure>
-			<figure>
+			<figure  data-category="category10">
 				<img src="assets/images/bar-lullaby-paris.png" alt="Bar “Lullaby” - Paris">
 				<figcaption>Bar “Lullaby” - Paris</figcaption>
 			</figure>
-			<figure>
+			<figure  data-category="category11">
 				<img src="assets/images/hotel-first-arte-new-delhi.png" alt="Hotel First Arte - New Delhi">
 				<figcaption>Hotel First Arte - New Delhi</figcaption>
 			</figure>
