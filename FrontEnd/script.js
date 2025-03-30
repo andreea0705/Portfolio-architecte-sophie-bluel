@@ -1,14 +1,12 @@
 /** -- Début déclaration constantes (const) et variables (let) -- **/
   let elementArray; // Stocke les données des travaux
   const allBtn = document.querySelector(".allBtn");//Sélectionne l'élément du DOM avec la classe allBtn
-/** -- Fin déclaration constantes et variables -- **/
+  const modifierProjetsContainer = document.querySelector(".modifier-projets-container"); // Boutons liés à "modifier"
+  /** -- Fin déclaration constantes et variables -- **/
 
 /** -- Début Code exécuté au chargement du site -- **/
   fetchCategoriesWorks(); // Charge les catégories pour créer les boutons
   fetchDataWorks(); // Charge les données des travaux pour les afficher dans la galerie
-
-  
-
 /** -- Fin Code exécuté au chargement du site -- **/
 
 /** -- Début déclaration des fonctions -- */
@@ -130,18 +128,4 @@ function AddGalleryModale() {
   // Code pour gérer les fonctionnalités liées à la modale
 }
 /** -- Fin déclaration des fonctions -- */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
