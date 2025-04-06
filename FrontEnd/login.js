@@ -33,12 +33,11 @@ function fetchUserLogin() {  //declarer une fontion
         }
     })
     .then(dataUser => {
-        // Token d'autentification qui traite les données JSON retournées par le serveur: 
-        // Stocke le token d'authentification et la connexion dans le stockage local.
-        // Redirige l'utilisateur vers la page index.html
-        localStorage.setItem("token", dataUser.token);
-        localStorage.setItem("login", true);
-        window.location.href = "./index.html";
+        localStorage.setItem("token", dataUser.token); // Enregistre le token
+        localStorage.setItem("isLoggedIn", true); // Marque l'utilisateur comme connecté
+        localStorage.setItem("userEmail", email); // Enregistre l'email
+        console.log("Utilisateur connecté :", email);
+        window.location.href = "./index.html"; // Redirige vers la page d'accueil
     })
     .catch(error => {
         console.log(error);
@@ -106,10 +105,10 @@ log.addEventListener("click", () => {
         localStorage.removeItem("token");
         editMode();
     } else {
-        // Here you would handle the login logic (e.g., show login form)
+        console.error("Erreur : L'élément avec l'ID 'loginLink' est introuvable dans le DOM.");
     }
 });
 
-editMode();
+
 
 

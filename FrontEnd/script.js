@@ -1,14 +1,12 @@
 /** -- Début déclaration constantes (const) et variables (let) -- **/
   let elementArray; // Stocke les données des travaux
   const allBtn = document.querySelector(".allBtn");//Sélectionne l'élément du DOM avec la classe allBtn
-/** -- Fin déclaration constantes et variables -- **/
+  const modifierProjetsContainer = document.querySelector(".modifier-projets-container"); // Boutons liés à "modifier"
+  /** -- Fin déclaration constantes et variables -- **/
 
 /** -- Début Code exécuté au chargement du site -- **/
   fetchCategoriesWorks(); // Charge les catégories pour créer les boutons
   fetchDataWorks(); // Charge les données des travaux pour les afficher dans la galerie
-
-  
-
 /** -- Fin Code exécuté au chargement du site -- **/
 
 /** -- Début déclaration des fonctions -- */
@@ -123,6 +121,57 @@ function AddEventsToFiltersButton(){
   });
 }
 
+/** -- Code exécuté au chargement du site -- **/
+document.addEventListener("DOMContentLoaded", () => {
+  console.log("DOM complètement chargé.");
+
+  // Vérifie si l'utilisateur est connecté
+  const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+  const loginLink = document.getElementById("loginLink"); // Sélectionne le bouton "login/logout"
+
+  if (isLoggedIn) {
+    console.log("Utilisateur connecté.");
+    loginLink.textContent = "Logout"; // Change le texte en "Logout"
+    loginLink.href = "#"; // Empêche la redirection inutile
+    loginLink.addEventListener("click", handleLogout); // Associe la fonction de déconnexion
+    showButtons(); // Affiche les boutons réservés aux utilisateurs connectés
+  } else {
+    console.log("Utilisateur non connecté.");
+    loginLink.textContent = "Login"; // Change le texte en "Login"
+    loginLink.href = "./login.html"; // Redirige vers la page de connexion
+    
+    hideButtons(); // Cache les boutons réservés aux utilisateurs connectés
+  }
+});
+
+/** -- Fonction pour afficher les boutons si l'utilisateur est connecté -- **/
+function showButtons() {
+  const allBtn = document.querySelector(".allBtn");
+  const modifierProjetsContainer = document.querySelector(".modifier-projets-container");
+
+  if (allBtn) allBtn.style.display = "flex"; // Affiche les boutons
+  if (modifierProjetsContainer) modifierProjetsContainer.style.display = "flex"; // Affiche les boutons de modification
+}
+
+/** -- Fonction pour cacher les boutons si l'utilisateur n'est pas connecté -- **/
+function hideButtons() {
+  const allBtn = document.querySelector(".allBtn");
+  const modifierProjetsContainer = document.querySelector(".modifier-projets-container");
+
+  if (allBtn) allBtn.style.display = "none"; // Cache les boutons
+  if (modifierProjetsContainer) modifierProjetsContainer.style.display = "none"; // Cache les boutons de modification
+}
+
+
+/** -- Fonction pour gérer la déconnexion -- **/
+function handleLogout(event) {
+  event.preventDefault(); // Empêche le rechargement de la page au clic sur "Logout"
+  localStorage.removeItem("isLoggedIn"); // Supprime l'état connecté
+  localStorage.removeItem("userEmail"); // Supprime l'email
+  console.log("Utilisateur déconnecté.");
+  location.reload(); // Recharge la page pour appliquer les changements
+}
+
 
 // Fonction pour gérer le filtrage des photos
 function AddGalleryModale() {
@@ -130,18 +179,4 @@ function AddGalleryModale() {
   // Code pour gérer les fonctionnalités liées à la modale
 }
 /** -- Fin déclaration des fonctions -- */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
