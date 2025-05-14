@@ -180,3 +180,248 @@ function AddGalleryModale() {
 }
 /** -- Fin déclaration des fonctions -- */
 
+
+
+// Modal1 Toggle ouvert et fermer
+//récupérer des éléments du DOM avec document.querySelector() et document.querySelectorAll()
+const modal2 = document.querySelector(".modal-container2");
+const modal1 = document.querySelector(".modal-container");
+const modalOpen = document.querySelectorAll(".modal-open");//Sélectionne tous les éléments .modal-open (boutons qui ouvrent modal1)
+const modalClose = document.querySelectorAll(".modal-close");//Sélectionne tous les boutons .modal-close (pour fermer les modales)
+const AddPicture = document.querySelector(".addpicture");//Sélectionne le bouton .addpicture (qui ouvre modal2 pour ajouter une image)
+//Ouverture de la première modale
+modalOpen.forEach((trigger) => trigger.addEventListener("click", OpenModal));
+//^Pour chaque élément .modal-open, on écoute le clic et exécute OpenModal()
+function OpenModal() {
+  modal1.classList.add("active");//Ajoute la classe "active" à modal1, ce qui affiche la modale.
+}
+
+modalClose.forEach((trigger) => trigger.addEventListener("click", CloseModal));
+//^Ajoute un écouteur de clic à chaque bouton .modal-close
+function CloseModal() { //Supprime "active" de modal1 et modal2, les rendant invisibles
+  modal1.classList.remove("active");
+  modal2.classList.remove("active");
+}
+//Si l’utilisateur veut revenir à la première modale après avoir ouvert modal2, il clique sur .arrowback
+const arrowBack = document.querySelector(".arrowback");
+
+arrowBack.addEventListener("click", () => {
+  modal1.classList.add("active");
+  modal2.classList.remove("active");
+});
+
+
+
+
+
+
+
+
+
+
+//afficher la galerie dans la modale
+
+
+const imgContainer = document.querySelector(".img-container");
+
+function fetchGalleryImages() {
+  console.log("fetchGalleryImages() exécutée"); // Vérifie si la fonction est appelée
+  fetch("http://" + window.location.hostname + ":5678/api/works")
+      .then(response => response.json())
+      .then(data => {
+          console.log("Données des images :", data); // Vérifie que les données arrivent bien
+          displayImages(data);
+      })
+      .catch(error => console.error("Erreur lors du chargement des images :", error));
+}
+function displayImages(images) {
+  imgContainer.innerHTML = ""; // Nettoie le conteneur avant d’ajouter les nouvelles images
+
+
+  images.forEach(image => {
+      const figure = document.createElement("figure");
+      figure.classList.add("element-modal");
+
+      const deleteIcon = document.createElement("img");
+      deleteIcon.src = "./assets/icons/bin.svg";
+      deleteIcon.alt = "Supprimer";
+      deleteIcon.classList.add("logobin");
+      deleteIcon.setAttribute("data-id", image.id);
+
+      const imgElement = document.createElement("img");
+      imgElement.src = image.imageUrl;
+      imgElement.alt = image.title;
+      imgElement.classList.add("img-modal");
+
+      const caption = document.createElement("figcaption");
+      caption.textContent = "Éditer";
+
+      figure.appendChild(deleteIcon);
+      figure.appendChild(imgElement);
+      figure.appendChild(caption);
+
+      imgContainer.appendChild(figure);
+  });
+
+  // Suppression des images au clic sur l'icône poubelle
+  document.querySelectorAll(".logobin").forEach(bin => {
+      bin.addEventListener("click", () => {
+          deleteImage(bin.getAttribute("data-id"));
+      });
+  });
+}
+
+//definir le token
+const token = localStorage.getItem("token"); //recuperer ce qu il y a sur le local storage
+console.log("Token d'authentification :", token);
+
+modalOpen.forEach((trigger) => trigger.addEventListener("click", () => {
+  OpenModal();
+  fetchGalleryImages(); // Charge les images dans la modale
+}));
+function deleteImage(imageId) {
+  fetch("http://" + window.location.hostname + `:5678/api/works/${imageId}`, {
+      method: "DELETE",
+      headers: {
+          accept: "*/*",
+          Authorization: `Bearer ${token}`,
+      }
+  })
+  .then(response => {
+      if (!response.ok) throw new Error("Échec de la suppression");
+      console.log("Image supprimée :", imageId);
+      fetchGalleryImages(); // Recharge la galerie après suppression
+  })
+  .catch(error => console.error("Erreur suppression :", error));
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// btn ajouter des photos
+AddPicture.addEventListener("click", () => { //Quand l’utilisateur clique sur .addpicture, modal2 s'affiche, et modal1 se ferme
+  modal2.classList.add("active");
+  modal1.classList.remove("active");
+});
+
+
+
+//  Ajout Photo 2ème Modal
+// Le script récupère les champs du formulaire pour ajouter une image
+const AddPicModal = document.querySelector(".input-addpic");//AddPicModal → Sélectionne l'input pour uploader une image (.input-addpic).
+const previewImg = document.querySelector(".import-pictures");//previewImg → Sélectionne l'endroit où l'image sera affichée (.import-pictures).
+const AddTitle = document.querySelector(".title"); //AddTitle → Sélectionne le champ texte pour le titre (.title)
+const AddCategorie = document.querySelector(".category");//Sélectionne le menu déroulant des catégories
+const Submit = document.querySelector(".valider");//Submit → Sélectionne le bouton "Valider" (.valider).
+const msgError = document.querySelector(".msg-error");
+const form = document.querySelector(".formmodal2");
+console.log(form);
+
+function addImage() { //Affiche l’image sélectionnée en aperçu avant l’envoi
+  // Ajout images
+  AddPicModal.addEventListener("input", (e) => {
+    console.log(AddPicModal.files[0]);
+    imgPreview = e.target.files[0];
+    const img = URL.createObjectURL(AddPicModal.files[0]);
+    // console.log(img)
+    previewImg.src = img;
+    previewImg.style.setProperty("visibility", "visible");
+  });
+
+  //Titre
+  AddTitle.addEventListener("input", (e) => { //Récupération du titre et de la catégorie
+    inputTitle = e.target.value;
+    console.log(inputTitle);
+  });
+  
+  //Catégories
+  let inputCategory = ""; // Déclaration globale
+
+  AddCategorie.addEventListener("input", (e) => {
+    inputCategory = e.target.selectedIndex;
+    console.log(inputCategory);
+  });
+
+  // Si tout les elements sont remplies alors changements couleurs boutons !== (strictement different)
+  form.addEventListener("change", () => { //Changement de couleur du bouton "Valider"
+    //Quand tous les champs sont remplis, le bouton devient actif
+    if (imgPreview !== "" && inputTitle !== "" && inputCategory !== "") {
+      Submit.style.background = "#1D6154";
+      Submit.style.cursor = "pointer";
+    } else {
+      Submit.style.backgroundColor = ""; // Réinitialise la couleur par défaut du bouton
+    }
+  });
+
+  //Submit
+  Submit.addEventListener("click", (e) => {
+    e.preventDefault(); //empêche le formulaire d’être soumis normalement (sans cette ligne, la page se rechargerait)
+    if (imgPreview && inputTitle && inputCategory) { //On vérifie ici si tous les champs sont bien remplis: choisir une image et categorie;renseignér un titre
+      const formData = new FormData();// Cette partie crée un objet formData qui stocke les données à envoyer
+      console.log(imgPreview, inputTitle, inputCategory);
+      formData.append("image", imgPreview);
+      formData.append("title", inputTitle);
+      formData.append("category", inputCategory);
+      console.log(formData);
+
+      const token = localStorage.getItem("token"); //recuperer ce qu il y a sur le local storage
+
+      console.log("Token d'authentification :", token);
+
+      fetchDataSubmit(); //On appelle fetchDataSubmit(), qui va envoyer formData à l’API
+      async function fetchDataSubmit() {
+        try {
+          // Fetch ajout des travaux
+          const response = await fetch(
+            "http://" + window.location.hostname + ":5678/api/works",
+            {
+              method: "POST", //Indique qu’on ajoute un nouvel élément
+              headers: {
+                Authorization: `Bearer ${token}`, //Ajoute un jeton d’authentification pour vérifier que l’utilisateur est connecté
+              },
+              body: formData, //Envoie les données en format FormData
+            }
+          );
+          const dataresponse = await response.json();
+          console.log(dataresponse);
+          msgError.style.color = "#1D6154";
+          Submit.style.background = "#1D6154";
+
+          //Clear les galleries
+          const gallery = document.querySelector(".gallery");
+
+
+          gallery.innerHTML = ""; //Efface la galerie avant d’ajouter le nouveau projet
+          fetchDataWorks(); //Recharge les travaux
+          previewImg.style.setProperty("visibility", "hidden"); //Cache l’image d’aperçu après l’envoi
+          imgContainer.style.setProperty("display", "flex");
+          setTimeout(() => {
+            msgError.innerText = "";
+          }, 4000);
+        } catch (error) {
+          console.log("Il y a eu une erreur sur le Fetch: " + error);
+        }
+      }
+    } else {
+      msgError.innerText = "Veuillez remplir tous les champs.";
+      msgError.style.color = "red";
+      setTimeout(() => {
+        msgError.innerText = "";
+      }, 4000);
+      console.log("Tous les champs ne sont pas remplis !");
+    }
+  });
+}
+
+addImage();

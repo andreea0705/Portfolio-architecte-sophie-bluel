@@ -29,7 +29,7 @@ function fetchUserLogin() {  //declarer une fontion
             localStorage.setItem("login", undefined);
             errorMsg.innerText = "Erreur dans l’identifiant ou le mot de passe";
             console.log("Connexion Impossible : Erreur Identifiant ou Mot de passe");
-            throw new Error('Connexion Impossible');
+            throw new Error('Connexion Impossible');   
         }
     })
     .then(dataUser => {
