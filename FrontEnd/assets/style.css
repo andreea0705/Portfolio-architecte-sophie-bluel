@@ -355,6 +355,7 @@ a {
 	align-items: center;
 	flex-direction: row;
 	margin-left: 31px;
+	margin-bottom: 25px;
 }
 
 /* MODALE 1*/
@@ -372,10 +373,10 @@ figcaption {
 .img-container {
 	display: flex;
 	flex-direction: row;
-	width: 60%;
+	width: 80%; /*mettre 5 photos sur une seule ligne*/
 	flex-wrap: wrap;
 	height: 60%;
-	overflow:auto;
+	/*overflow:auto; creer une bare de scroll*/
 	justify-content: flex-start;
 	margin-bottom: 30px;
 }
@@ -439,7 +440,8 @@ figcaption {
 
 .modal {
 	opacity: 0;
-	height: 731px;
+	/*height: 731px;*/
+	max-height: calc(100vh - 30px); /*laisser une espace en haut de la modale*/
 	width: 630px;
 	left: 50%;
 	top: 50%;
@@ -458,6 +460,7 @@ figcaption {
 	flex-direction: column;
 	align-items: center;
 	height: 670px;
+	max-height: calc(100vh - 30px); /*laisser une espace en haut de la modale*/
 	width: 630px;
 	border-radius: 10px;
 	left: 50%;
@@ -505,6 +508,7 @@ figcaption {
 }
 
 .delete-gallery {
+	visibility: hidden;
 	display: flex;
 	justify-content: center;
 	align-items: center;

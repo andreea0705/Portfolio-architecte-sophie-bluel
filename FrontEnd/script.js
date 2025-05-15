@@ -131,13 +131,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (isLoggedIn) {
     console.log("Utilisateur connecté.");
-    loginLink.textContent = "Logout"; // Change le texte en "Logout"
+    loginLink.textContent = "logout"; // Change le texte en "Logout"
     loginLink.href = "#"; // Empêche la redirection inutile
     loginLink.addEventListener("click", handleLogout); // Associe la fonction de déconnexion
     showButtons(); // Affiche les boutons réservés aux utilisateurs connectés
   } else {
     console.log("Utilisateur non connecté.");
-    loginLink.textContent = "Login"; // Change le texte en "Login"
+    loginLink.textContent = "login"; // Change le texte en "Login"
     loginLink.href = "./login.html"; // Redirige vers la page de connexion
     
     hideButtons(); // Cache les boutons réservés aux utilisateurs connectés
