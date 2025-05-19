@@ -222,7 +222,7 @@ arrowBack.addEventListener("click", () => {
 //afficher la galerie dans la modale
 
 
-const imgContainer = document.querySelector(".img-container");
+const imgContainer = document.querySelector(".img-container");//sélectionne l'élément HTML où les images seront affichées
 
 function fetchGalleryImages() {
   console.log("fetchGalleryImages() exécutée"); // Vérifie si la fonction est appelée
@@ -234,39 +234,43 @@ function fetchGalleryImages() {
       })
       .catch(error => console.error("Erreur lors du chargement des images :", error));
 }
+//la fonction displayImages(images), qui s'occupe d'afficher les images dans le conteneur .img-container
 function displayImages(images) {
   imgContainer.innerHTML = ""; // Nettoie le conteneur avant d’ajouter les nouvelles images
 
 
-  images.forEach(image => {
-      const figure = document.createElement("figure");
+  images.forEach(image => { //Pour chaque image, le code crée et ajoute des éléments HTML à la galerie
+      const figure = document.createElement("figure");//Crée un élément HTML <figure> pour organiser l’image et ses boutons
       figure.classList.add("element-modal");
-
-      const deleteIcon = document.createElement("img");
-      deleteIcon.src = "./assets/icons/bin.svg";
-      deleteIcon.alt = "Supprimer";
+      //Ajout de l’icône de suppression
+      const deleteIcon = document.createElement("img");//Crée une balise <img> pour l’icône poubelle
+      deleteIcon.src = "./assets/icons/bin.svg";//Définit l’image de l’icône (un fichier bin.svg)
+      deleteIcon.alt = "Supprimer";//Ajoute un texte alternatif au cas où l’image ne s’afficherait pas
       deleteIcon.classList.add("logobin");
-      deleteIcon.setAttribute("data-id", image.id);
+      deleteIcon.setAttribute("data-id", image.id);//Ajoute un attribut personnalisé data-id, qui stocke l'ID unique de l’image
+      //Ajout de l’image
+      const imgElement = document.createElement("img");//Crée une balise <img> pour afficher l’image.
+      imgElement.src = image.imageUrl;//Charge l’image avec l’URL récupérée depuis image.imageUrl.
+      imgElement.alt = image.title;//Ajoute un texte alternatif basé sur le titre de l’image.
 
-      const imgElement = document.createElement("img");
-      imgElement.src = image.imageUrl;
-      imgElement.alt = image.title;
+
+      
       imgElement.classList.add("img-modal");
 
       const caption = document.createElement("figcaption");
       caption.textContent = "Éditer";
-
+      //Ajout des éléments icone image et legende dans figure
       figure.appendChild(deleteIcon);
       figure.appendChild(imgElement);
       figure.appendChild(caption);
 
-      imgContainer.appendChild(figure);
+      imgContainer.appendChild(figure);//La <figure> est ajoutée au conteneur imgContainer ou tout sera afichee
   });
 
   // Suppression des images au clic sur l'icône poubelle
-  document.querySelectorAll(".logobin").forEach(bin => {
-      bin.addEventListener("click", () => {
-          deleteImage(bin.getAttribute("data-id"));
+  document.querySelectorAll(".logobin").forEach(bin => { //Sélectionne toutes les icônes poubelles
+      bin.addEventListener("click", () => { //Écoute le clic de l’utilisateur sur l’icône poubelle.
+          deleteImage(bin.getAttribute("data-id"));//Appelle la fonction deleteImage(imageId) pour supprimer l’image.(Récupère l’ID de l’image stocké dans data-id)
       });
   });
 }
@@ -277,11 +281,12 @@ console.log("Token d'authentification :", token);
 
 modalOpen.forEach((trigger) => trigger.addEventListener("click", () => {
   OpenModal();
-  fetchGalleryImages(); // Charge les images dans la modale
+  fetchGalleryImages(); // Lorsque l'utilisateur ouvre une modale, cela déclenche fetchGalleryImages() pour afficher les images dans la modale
 }));
+//Suppression d’une image
 function deleteImage(imageId) {
   fetch("http://" + window.location.hostname + `:5678/api/works/${imageId}`, {
-      method: "DELETE",
+      method: "DELETE",//Envoie une requête DELETE à l’API pour supprimer une image spécifique
       headers: {
           accept: "*/*",
           Authorization: `Bearer ${token}`,
