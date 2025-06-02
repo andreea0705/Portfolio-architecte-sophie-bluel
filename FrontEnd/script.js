@@ -296,6 +296,7 @@ function deleteImage(imageId) {
       if (!response.ok) throw new Error("Échec de la suppression");
       console.log("Image supprimée :", imageId);
       fetchGalleryImages(); // Recharge la galerie après suppression
+      fetchDataWorks();
   })
   .catch(error => console.error("Erreur suppression :", error));
 }
