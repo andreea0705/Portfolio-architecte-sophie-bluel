@@ -412,6 +412,18 @@ function addImage() { //Affiche l’image sélectionnée en aperçu avant l’en
           fetchDataWorks(); //Recharge les travaux
           previewImg.style.setProperty("visibility", "hidden"); //Cache l’image d’aperçu après l’envoi
           imgContainer.style.setProperty("display", "flex");
+          form.reset(); 
+          //relancer la validation de formulaire button valider 
+
+    
+
+          
+          
+          //fermer la modale
+
+
+
+
           setTimeout(() => {
             msgError.innerText = "";
           }, 4000);
@@ -427,6 +439,10 @@ function addImage() { //Affiche l’image sélectionnée en aperçu avant l’en
       }, 4000);
       console.log("Tous les champs ne sont pas remplis !");
     }
+  });
+  Submit.addEventListener("click", () => {
+      modal1.classList.add("active"); 
+      modal2.classList.remove("active");
   });
 }
 
