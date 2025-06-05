@@ -365,8 +365,10 @@ function addImage() { //Affiche l’image sélectionnée en aperçu avant l’en
     if (imgPreview !== "" && inputTitle !== "" && inputCategory !== "") {
       Submit.style.background = "#1D6154";
       Submit.style.cursor = "pointer";
+      Submit.disabled = false ;
     } else {
       Submit.style.backgroundColor = ""; // Réinitialise la couleur par défaut du bouton
+      Submit.disabled = true ;
     }
   });
 
@@ -413,13 +415,8 @@ function addImage() { //Affiche l’image sélectionnée en aperçu avant l’en
           previewImg.style.setProperty("visibility", "hidden"); //Cache l’image d’aperçu après l’envoi
           imgContainer.style.setProperty("display", "flex");
           form.reset(); 
-          //relancer la validation de formulaire button valider 
-
-    
-
-          
-          
           //fermer la modale
+          
 
 
 
@@ -440,8 +437,11 @@ function addImage() { //Affiche l’image sélectionnée en aperçu avant l’en
       console.log("Tous les champs ne sont pas remplis !");
     }
   });
-  Submit.addEventListener("click", () => {
-      modal1.classList.add("active"); 
+  
+  //relancer la validation de formulaire button valider 
+  //revenir à la modale precedente quand on click sur le button valider
+  Submit.addEventListener("click", () => { 
+      modal1.classList.remove("active"); 
       modal2.classList.remove("active");
   });
 }
