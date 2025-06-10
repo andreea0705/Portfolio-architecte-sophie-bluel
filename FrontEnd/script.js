@@ -446,4 +446,24 @@ function addImage() { //Affiche l’image sélectionnée en aperçu avant l’en
   });
 }
 
+Submit.addEventListener("click", () => { 
+    modal1.classList.remove("active"); 
+    modal2.classList.remove("active");
+
+    // Réinitialisation des variables pour une nouvelle soumission
+    imgPreview = "";
+    inputTitle = "";
+    inputCategory = "";
+    
+    previewImg.src = ""; // Efface l'image affichée pour éviter qu'elle reste visible
+    previewImg.style.setProperty("visibility", "hidden");
+    AddTitle.value = ""; // Réinitialise le champ titre
+    AddCategorie.selectedIndex = 0; // Réinitialise la sélection de catégorie
+
+    // Désactiver le bouton "Valider" après réinitialisation
+    Submit.style.backgroundColor = ""; 
+    Submit.style.cursor = "default";
+    Submit.disabled = true;
+});
+
 addImage();
